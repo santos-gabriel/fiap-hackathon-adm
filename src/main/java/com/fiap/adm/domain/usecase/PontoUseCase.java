@@ -13,12 +13,8 @@ public class PontoUseCase implements IPontoUseCasePort {
     private final IPontoRepositoryPort repository;
 
     @Override
-    public Optional<Ponto> registrar(String usuario, String matricula, String email) {
-        return repository.registrar(usuario, matricula, email);
+    public Optional<Ponto> salvar(Ponto ponto) {
+        return repository.salvar(ponto);
     }
 
-    @Override
-    public List<Ponto> obterRegistrosPorUsuario(String usuario) {
-        return repository.obterRegistrosPorUsuario(usuario);
-    }
 }
