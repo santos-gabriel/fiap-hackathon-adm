@@ -16,5 +16,5 @@ public class Ponto {
     private String usuario;
     private String matricula;
     private String email;
-    private final Date data = new Date();
+    private Date data;
 }
