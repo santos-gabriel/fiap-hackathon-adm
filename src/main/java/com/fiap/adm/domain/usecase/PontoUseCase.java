@@ -5,6 +5,7 @@ import com.fiap.adm.domain.ports.in.IPontoUseCasePort;
 import com.fiap.adm.domain.ports.out.IPontoRepositoryPort;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,12 +14,13 @@ public class PontoUseCase implements IPontoUseCasePort {
     private final IPontoRepositoryPort repository;
 
     @Override
-    public Optional<Ponto> registrar(String usuario, String matricula, String email) {
-        return repository.registrar(usuario, matricula, email);
+    public Optional<Ponto> salvar(Ponto ponto) {
+        return repository.salvar(ponto);
     }
 
     @Override
-    public List<Ponto> obterRegistrosPorUsuario(String usuario) {
-        return repository.obterRegistrosPorUsuario(usuario);
+    public List<Ponto> buscarPorPeriodo(Date inicio, Date fim) {
+        return repository.buscarPorPeriodo(inicio, fim);
     }
+
 }

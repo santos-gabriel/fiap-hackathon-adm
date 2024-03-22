@@ -8,6 +8,7 @@ import com.fiap.adm.infrastructure.persistence.repository.PontoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -18,17 +19,14 @@ public class PontoRepositoryAdapter implements IPontoRepositoryPort {
     private final PontoRepository repository;
 
     @Override
-    public Optional<Ponto> registrar(String usuario, String matricula, String email) {
-        PontoEntity ponto = PontoEntity.builder()
-                .usuario(usuario)
-                .matricula(matricula)
-                .email(email)
-                .build();
-        return Optional.of(new PontoEntity().to(repository.save(ponto)));
+    public Optional<Ponto> salvar(Ponto ponto) {
+        PontoEntity pontoEntity = new PontoEntity().from(ponto);
+        return Optional.of(new PontoEntity().to(repository.save(pontoEntity)));
     }
 
     @Override
-    public List<Ponto> obterRegistrosPorUsuario(String usuario) {
-        return repository.findPontoEntityByUsuarioEquals(usuario).stream().map(e -> new PontoEntity().to(e)).collect(Collectors.toList());
+    public List<Ponto> buscarPorPeriodo(Date inicio, Date fim) {
+        return repository.findPontoEntityByDataBetween(inicio, fim).stream().map(e -> new PontoEntity().to(e)).collect(Collectors.toList());
     }
+
 }
